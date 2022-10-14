@@ -1,0 +1,35 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+    <head>
+    {% block head %}
+        {% block meta %}
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta name="description" content="">
+            <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+            <meta name="generator" content="Hugo 0.101.0">
+        {% endblock meta %}
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/favicon-32x32.png' %}"/>
+        <!--Title-->
+        <title>{% block title %}{{ user.first_name }} {% endblock %}|BimTian</title>
+        <!--Stylesheet-->
+        {% block stylesheet %}
+            {% include 'base_template/css.html' %}
+            <!--custom stylesheet-->
+            {% block css %}{% endblock css %}
+        {% endblock stylesheet %}
+        <!--custom head-->
+        {% block customheader %}{% endblock customheader %}
+    {% endblock head %}    
+    </head>
+    <body>
+    {% block body %}{% endblock body %}
+
+    {% block javascript %}
+        {% include 'base_template/js.html' %}
+        {% block js %}{% endblock js %}
+    {% endblock javascript %}
+    </body>
+</html>

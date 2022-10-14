@@ -1,0 +1,50 @@
+{% extends 'base_template/index.html' %}
+{% load static %}
+{% block title %}Signup{%endblock%}
+{% block body %}
+<main class="container-fluid">
+    <div class="row">
+        <div class="col-md-5 px-5">
+            <div class="text-center mt-3">
+                <img src="{% static 'image/logo.jpeg'%}" class="img-fluid m-2" alt="logo" width="100" height="100">
+                <h2 class="font-weight-bold">BIMTian</h2>
+                <h4 class="my-3">Sign up for free!</h4>
+            </div>
+            <hr>
+            <!-- Login section -->
+            <div>
+                <form>
+                    <div class="form-group my-3">
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
+                    </div>
+                    <div class="form-group my-3">
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter first name">
+                    </div>
+                    <div class="form-group my-3">
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter last name">
+                    </div>
+                    <div class="form-group my-3">
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    </div>
+                    <div class="form-group my-3">
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="form-group my-3">
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Re-Password">
+                    </div>
+                    <div class="form-group my-3">
+                        <span class="text-secondary">I agree to the<a href="#"> privacy policy </a>and <a href="#">terms of service</a> </span>
+                    </div>
+                    <button type="button" class="btn btn-success btn-lg btn-block">Signup with email</button>
+                    <div class="form-group my-3">
+                        <a href="{% url 'login' %}">Already have an account?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-7 d-none d-md-block loginBg">
+            {% include 'authentication/right_side.html' %}
+        </div>
+    </div>
+</main>
+{% endblock %}
