@@ -54,15 +54,15 @@ class SingupView(generic.CreateView):
     model = User
     form_class = NewUserForm
     success_message = "User created successfully"
-    title = "New user signup"
+    title = "New user registration"
     template_name = 'authentication/signup.html'
-    uccess_url = reverse_lazy("login")
+    success_url = reverse_lazy("login")
 
     def form_valid(self, form, *args, **kwargs):
         with transaction.atomic():
-            self.object.save()
+            form.save()
         messages.success(self.request, self.success_message)
-        return HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect(self.success_url)
 
     def form_invalid(self, form):
         messages.error(self.request, form.errors)
