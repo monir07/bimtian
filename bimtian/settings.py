@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from django.contrib.messages import constants as messages
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -33,6 +34,8 @@ DEFAULTS_APPS = [
 LOCAL_APPS = ['userinfo']
 THIRD_PARTY_APPS = ['crispy_forms']
 INSTALLED_APPS = DEFAULTS_APPS + LOCAL_APPS + THIRD_PARTY_APPS
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -127,3 +130,9 @@ MEDIA_URL = 'media/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# custom messages tag
+MESSAGE_TAGS = {
+    messages.SUCCESS: 'alert alert-success',
+    messages.ERROR: 'alert alert-danger',
+}

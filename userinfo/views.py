@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.db import transaction
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 # Create your views here.
 class CustomPermissionMixin(PermissionRequiredMixin):
@@ -60,10 +61,15 @@ class SingupView(generic.CreateView):
     def form_valid(self, form, *args, **kwargs):
         with transaction.atomic():
             self.object.save()
+        messages.success(self.request, self.success_message)
         return HttpResponseRedirect(self.get_success_url())
 
+    def form_invalid(self, form):
+        messages.error(self.request, form.errors)
+        return super().form_invalid(form)
+
     def get_context_data(self, **kwargs):
-        form = self.get_form()
-        kwargs['form'] = form
-        kwargs['title'] = self.title
-        return super().get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.title
+        context['form'] = self.get_form()
+        return context
