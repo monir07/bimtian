@@ -8,6 +8,11 @@ from django.db import transaction
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.contrib.auth.views import (LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView)
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.admin.models import LogEntry, ADDITION, CHANGE, DELETION
+from django.contrib.contenttypes.models import ContentType
 
 # Create your views here.
 class CustomPermissionMixin(PermissionRequiredMixin):
@@ -32,23 +37,86 @@ class CommonMixin(SuccessMessageMixin, LoginRequiredMixin, CustomPermissionMixin
         data = super().get_context_data(*args, **kwargs)
         data['title'] = self.title
         return data
-
-
-class LoginView(SuccessMessageMixin, generic.CreateView):
-    model = User
-    form_class = NewUserForm
-    template_name = 'indent/material_demand/form.html'
-    success_message = "Information added successfully"
-    title = "Add Material Demand"
-    # success_url = reverse_lazy("material_demand_list")
-    template_name = 'authentication/login.html'
-
-    def get(self, request, *args, **kwargs):
-        context = {
+class CustomLogEntry():
+    def log_change(self, request, object, message):        
+        return LogEntry.objects.log_action(
+            user_id=request.user.id,
+            content_type_id=ContentType.objects.get_for_model(object).pk,
+            object_id=object.id,
+            object_repr=str(object),
+            action_flag=CHANGE,
+            change_message=message,
+            )
+    def log_addition(self, request, object, message):
+        return LogEntry.objects.log_action(
+            user_id=request.user.pk,
+            content_type_id=ContentType.objects.get_for_model(object).pk,
+            object_id=object.pk,
+            object_repr=str(object),
+            action_flag=ADDITION,
+            change_message=message,
+        )
+    def log_deletion(self, request, object, message):
+        return LogEntry.objects.log_action(
+            user_id=request.user.pk,
+            content_type_id=ContentType.objects.get_for_model(object).pk,
+            object_id=object.pk,
+            object_repr=str(object),
+            action_flag=DELETION,
+            change_message=message,
+        )
             
-        }
-        return render(request, self.template_name, context)
 
+class CustomLoginView(LoginView):
+    form_class = AuthenticationForm
+    template_name = 'authentication/login.html'
+    success_url = reverse_lazy("signup")
+    success_message = 'Login successfully'
+
+    def form_valid(self, form):
+        """Security check complete. Log the user in."""
+        login(self.request, form.get_user())
+        log_obj = CustomLogEntry()
+        log_obj.log_addition(self.request, form.get_user(), self.success_message)
+        return HttpResponseRedirect(self.success_url)
+    
+    def form_invalid(self, form):
+        messages.error(self.request, form.errors)
+        return super().form_invalid(form)
+    
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            print("User is authenticated")
+            return HttpResponseRedirect(self.success_url)
+        return self.render_to_response(self.get_context_data())
+
+class UserPasswordChangeView(PasswordChangeView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('login')
+    template_name = 'authentication/password_change.html'
+    title = 'Password change'
+    success_message = 'Password Change successfully'
+    
+    def form_valid(self, form):
+        form.save()
+        # Updating the password logs out all other sessions for the user
+        # except the current one.
+        update_session_auth_hash(self.request, form.user)
+        messages.success(self.request, self.success_message)
+        log_obj = CustomLogEntry()
+        log_obj.log_change(self.request, form.user, self.success_message)
+        return HttpResponseRedirect(self.success_url)
+    
+    def form_invalid(self, form):
+        messages.error(self.request, form.errors)
+        return super().form_invalid(form)
+
+
+class CustomLogoutView(LogoutView):
+    next_page = reverse_lazy("login")
+    def get(self, request, *args, **kwargs):
+        logout(request)        
+        return HttpResponseRedirect(self.next_page)
 
 class SingupView(generic.CreateView):
     model = User
