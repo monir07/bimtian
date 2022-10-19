@@ -70,12 +70,13 @@ class CustomLogEntry():
 class CustomLoginView(LoginView):
     form_class = AuthenticationForm
     template_name = 'authentication/login.html'
-    success_url = reverse_lazy("signup")
+    success_url = reverse_lazy("dashboard")
     success_message = 'Login successfully'
 
     def form_valid(self, form):
         """Security check complete. Log the user in."""
         login(self.request, form.get_user())
+        messages.success(self.request, self.success_message)
         log_obj = CustomLogEntry()
         log_obj.log_addition(self.request, form.get_user(), self.success_message)
         return HttpResponseRedirect(self.success_url)
@@ -140,4 +141,13 @@ class SingupView(generic.CreateView):
         context = super().get_context_data(**kwargs)
         context['title'] = self.title
         context['form'] = self.get_form()
+        return context
+
+class AdminDashboard(generic.TemplateView):
+    template_name = 'admin/index.html'
+    title = 'Admin Dashboard'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.title
         return context
