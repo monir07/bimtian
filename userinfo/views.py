@@ -93,7 +93,7 @@ class CustomLoginView(LoginView):
 
 class UserPasswordChangeView(PasswordChangeView):
     form_class = PasswordChangeForm
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('dashboard')
     template_name = 'authentication/password_change.html'
     title = 'Password change'
     success_message = 'Password Change successfully'
@@ -144,7 +144,7 @@ class SingupView(generic.CreateView):
         return context
 
 class AdminDashboard(generic.TemplateView):
-    template_name = 'admin/index.html'
+    template_name = 'custom_admin/dashboard.html'
     title = 'Admin Dashboard'
 
     def get_context_data(self, **kwargs):
