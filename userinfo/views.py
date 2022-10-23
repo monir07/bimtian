@@ -151,3 +151,34 @@ class AdminDashboard(generic.TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = self.title
         return context
+
+
+class UserInfoCreateView(LoginRequiredMixin, generic.CreateView):
+    # permission_required = 'indent.create_materialdemanditem'
+    model = UserInfo
+    form_class = UserInfoForm
+    template_name = 'user_info/form.html'
+    success_message = "Information added successfully"
+    title = "Add User Information"
+    
+    def form_valid(self, form, *args, **kwargs):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        
+        self.object.created_by = self.request.user
+        with transaction.atomic():
+            self.object.save()
+        messages.success(self.request, self.success_message)
+        return HttpResponseRedirect(self.get_success_url())
+    
+    def form_invalid(self, form):
+        messages.error(self.request, form.errors)
+        return super().form_invalid(form)
+    
+    def get_success_url(self, **kwargs):  
+        return reverse_lazy("dashboard") # kwargs = {'pk': self.kwargs.get('pk')}
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.title
+        return context

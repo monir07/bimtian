@@ -106,7 +106,7 @@ class PortfolioInfo(BaseModel):
     company_name = models.CharField(max_length=100)    
     phone_no = models.CharField(max_length=100)
     about_me = models.CharField(max_length=250)
-    profile_img = models.ImageField(default = 'default.jpg', upload_to='profile_img/', validators=[file_size], help_text="File size should be less than 2mb(.jpg/.png/.gif)")
+    profile_img = models.ImageField(default = 'profile_img/default.jpg', upload_to='profile_img/', validators=[file_size], help_text="File size should be less than 2mb(.jpg/.png/.gif)")
     banner_image = models.ImageField(upload_to='banner_img/', validators=[file_size], help_text="File size should be less than 2mb(.jpg/.png/.gif)")
     footer_image = models.ImageField(upload_to='footer_img/', validators=[file_size], help_text="File size should be less than 2mb(.jpg/.png/.gif)")
     facebook_id = models.URLField(max_length=200)
@@ -116,11 +116,11 @@ class PortfolioInfo(BaseModel):
 
     def save(self, *args, **kwargs):
         super(PortfolioInfo, self).save(*args, **kwargs)
-        img = Image.open(self.profile_img)
+        img = Image.open(self.profile_img.path)
         if img.height > 300 and img.width > 300:
             output_size = (300, 300)
             img.thumbnail(output_size)
-            img.save()
+            img.save(self.profile_img.path)
 
 
 class Services(BaseModel):
