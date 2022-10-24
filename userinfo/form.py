@@ -99,3 +99,15 @@ class ContactRequestForm(forms.ModelForm):
 		model = ContactRequest
 		fields = '__all__'
 		exclude = ('user', 'created_by', 'updated_by', 'created_at', 'updated_at')
+
+class PermanentAddressForm(forms.ModelForm):
+	class Meta:
+		model = PermanentAddress
+		fields = '__all__'
+		exclude = ('user', 'created_by', 'updated_by', 'created_at', 'updated_at')
+
+class PresentAddressForm(forms.ModelForm):
+	class Meta:
+		model = PresentAddress
+		fields = '__all__'
+		exclude = ('user', 'created_by', 'updated_by', 'created_at', 'updated_at')

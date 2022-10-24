@@ -69,7 +69,7 @@ class MaritalOptions(models.TextChoices):
 
 
 def file_size(value): # add this to some file where you can import it from
-    limit = 2 * 1024 * 1024
+    limit = 1 * 1024 * 1024
     ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
     valid_extensions = ['.jpeg', '.jpg', '.png', '.gif']
     if value.size > limit:
@@ -106,9 +106,9 @@ class PortfolioInfo(BaseModel):
     company_name = models.CharField(max_length=100)    
     phone_no = models.CharField(max_length=100)
     about_me = models.CharField(max_length=250)
-    profile_img = models.ImageField(default = 'profile_img/default.jpg', upload_to='profile_img/', validators=[file_size], help_text="File size should be less than 2mb(.jpg/.png/.gif)")
-    banner_image = models.ImageField(upload_to='banner_img/', validators=[file_size], help_text="File size should be less than 2mb(.jpg/.png/.gif)")
-    footer_image = models.ImageField(upload_to='footer_img/', validators=[file_size], help_text="File size should be less than 2mb(.jpg/.png/.gif)")
+    profile_img = models.ImageField(default = 'profile_img/default.jpg', upload_to='profile_img/', validators=[file_size], help_text="File size should be less than 1mb(.jpg/.png/.gif)")
+    banner_image = models.ImageField(upload_to='banner_img/', validators=[file_size], help_text="File size should be less than 1mb(.jpg/.png/.gif)")
+    footer_image = models.ImageField(upload_to='footer_img/', validators=[file_size], help_text="File size should be less than 1mb(.jpg/.png/.gif)")
     facebook_id = models.URLField(max_length=200)
     linked_id = models.URLField(max_length=200)
     github_id = models.URLField(max_length=200)
@@ -132,7 +132,7 @@ class Services(BaseModel):
 class Portfolio(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='my_portfolio')
     project_name = models.CharField(max_length=150)
-    project_img = models.URLField(max_length=350)
+    project_img = models.ImageField(upload_to='project_cover/', validators=[file_size], help_text="File size should be less than 1mb(.jpg/.png/.gif)")
     preview_link = models.URLField(max_length=350)
     github_link = models.URLField(max_length=350)
 
@@ -149,7 +149,7 @@ class Education(BaseModel):
 
 class ProfessionalSkills(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='my_skill')
-    skill_logo = models.URLField(max_length=250)
+    skill_logo = models.ImageField(upload_to='skill_logo/', validators=[file_size], help_text="File size should be less than 1mb(.jpg/.png/.gif)")
     skill_name = models.CharField(max_length=100)
 
 
@@ -160,7 +160,7 @@ class Experince(BaseModel):
     join_year = models.IntegerField()
     resign_year = models.IntegerField()
     responsibility = models.TextField(max_length=350)
-    company_logo = models.URLField(max_length=250)
+    company_logo = models.ImageField(upload_to='company_logo/', validators=[file_size], help_text="File size should be less than 1mb(.jpg/.png/.gif)")
 
 
 class ClientFeedback(BaseModel):
@@ -168,7 +168,7 @@ class ClientFeedback(BaseModel):
     client_name = models.CharField(max_length=150)
     designation = models.CharField(max_length=150)
     company_name = models.CharField(max_length=150)
-    client_photo = models.URLField(max_length=350)
+    client_photo = models.ImageField(upload_to='client_img/', validators=[file_size], help_text="File size should be less than 1mb(.jpg/.png/.gif)")
 
     job_title = models.CharField(max_length=250)
     market_place = models.CharField(max_length=150)
@@ -188,7 +188,7 @@ class ContactRequest(BaseModel):
 
 
 class PresentAddress(BaseModel):
-    user_id = models.OneToOneField(User, on_delete=models.CASCADE, related_name='present_address')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='present_address')
     care_of = models.CharField(max_length=200)
     house_no = models.CharField(max_length=200)
     road_name = models.CharField(max_length=200)
@@ -202,7 +202,7 @@ class PresentAddress(BaseModel):
 
 
 class PermanentAddress(BaseModel):
-    user_id = models.OneToOneField(User, on_delete=models.CASCADE, related_name='permanent_address')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='permanent_address')
     care_of = models.CharField(max_length=200)
     house_no = models.CharField(max_length=200)
     road_name = models.CharField(max_length=200)
