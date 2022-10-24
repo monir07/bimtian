@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views import View, generic
+from django.db.models import Q,Count, Sum
 from .form import *
 from django.contrib.auth.models import User
 from django.db import transaction
@@ -182,3 +183,21 @@ class UserInfoCreateView(LoginRequiredMixin, generic.CreateView):
         context = super().get_context_data(**kwargs)
         context['title'] = self.title
         return context
+
+
+class UserInfoListView(LoginRequiredMixin, generic.ListView):
+    model = UserInfo
+    context_object_name = 'items'
+    template_name = 'user_info/user_info_list.html'
+    title = "User Information List"
+    # queryset = UserInfo.objects.all().order_by('-id')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)   
+        context['title'] = self.title
+        return context
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(Q(user__id=self.request.user.id))                            
+        return queryset

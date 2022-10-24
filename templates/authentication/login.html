@@ -41,9 +41,9 @@
                         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> {% endcomment %}
                         {{ form.password|as_crispy_field }}
                     </div>
-                    <div class="form-group my-3">
+                    {% comment %} <div class="form-group my-3">
                         <a href="{% url 'user_change_password' %}">Forgot Password?</a>
-                    </div>
+                    </div> {% endcomment %}
                     <button type="submit" class="btn btn-success btn-lg btn-block">Login with email</button>
                 </form>
             </div>

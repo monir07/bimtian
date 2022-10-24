@@ -1,0 +1,66 @@
+{% extends "custom_admin/base_site.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} {{title}} {%endblock%}
+{% block content %}
+  <div class="right_col" role="main">
+    <div>
+      {% for message in messages  %}
+      <div class="{{ message.tags }} alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+        </button>
+        <strong>Congrats!</strong> {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+
+    {% if items %}
+      <!-- DATA LIST START TABLE -->
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2> {{ title }} <small>Try hovering over the rows</small></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Father's Name</th>
+                    <th>Mother's Name</th>
+                    <th>Course Name</th>
+                    <th>Intake</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in items %}
+                  <tr>
+                    <th scope="row">{{ item.user.first_name }} {{ item.user.last_name }}</th>
+                    <td> {{ item.father_name }}</td>
+                    <td> {{ item.mother_name }} </td>
+                    <td> {{ item.course_name }} </td>
+                    <td> {{ item.intake_name }} </td>
+                    <td> <button class="btn btn-success"><i class="fa fa-eye"></i></button> </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <a href="{% url 'user_info_form' %}" class="btn btn-primary m-2">New Form</a>
+    {% endif %}
+  </div>
+{% endblock content %}
