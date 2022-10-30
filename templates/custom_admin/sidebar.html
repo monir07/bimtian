@@ -31,21 +31,22 @@
           <ul class="nav child_menu">
             <li><a href="{% url 'portfolio_info_list' %}">Portfolio Info</a></li>
             <li><a href="{% url 'service_list' %}">My Services</a></li>
-            <li><a href="{% url 'project_form' %}">My Projects</a></li>
-            <li><a href="{% url 'education_form' %}">Education Info</a></li>
-            <li><a href="{% url 'skill_form' %}">Professional Skill</a></li>
-            <li><a href="{% url 'experience_form' %}">My Experince</a></li>
-            <li><a href="{% url 'feedback_form' %}">Client Feedback</a></li>
+            <li><a href="{% url 'project_list' %}">My Projects</a></li>
+            <li><a href="{% url 'education_list' %}">Education Info</a></li>
+            <li><a href="{% url 'skill_list' %}">Professional Skill</a></li>
+            <li><a href="{% url 'experience_list' %}">My Experince</a></li>
+            <li><a href="{% url 'feedback_list' %}">Client Feedback</a></li>
           </ul>
         </li>
         <li><a><i class="fa fa-edit"></i> Personal Info Form <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="{% url 'profile_list' %}">User Info</a></li>
-            <li><a href="{% url 'present_address_form' %}">Present Address</a></li>
-            <li><a href="{% url 'permanent_address_form' %}">Permanent Address</a></li>
+            <li><a href="{% url 'present_address_list' %}">Present Address</a></li>
+            <li><a href="{% url 'permanent_address_list' %}">Permanent Address</a></li>
           </ul>
         </li>
         <li><a><i class="fa fa-commenting"></i> Messages</a></li>
+        <li><a href="{% url 'portfolio_site' user.id %}"><i class="fa fa-globe"></i> Portfolio Site</a></li>
       </ul>
     </div>
   </div>

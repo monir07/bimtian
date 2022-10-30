@@ -1,0 +1,149 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    {% block head %}
+        {% block meta %}
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta name="description" content="">
+            <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+            <meta name="generator" content="Hugo 0.101.0">
+        {% endblock meta %}
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="{% static '' %}"/>
+        <!--Title-->
+        <title>{% block title %}{{ user.first_name }} {% endblock %}|PortFolio</title>
+        <!--Stylesheet-->
+        {% block stylesheet %}
+        {% include 'base_template/css.html' %}
+        {% include 'portfolio/home/css.html' %}
+            <!--custom stylesheet-->
+            {% block css %}{% endblock css %}
+        {% endblock stylesheet %}
+        <!--custom head-->
+        {% block customhead %}{% endblock customhead %}
+    {% endblock head %}    
+  </head>
+  <body>
+
+    <header class="container-fluid">
+        {% include 'portfolio/components/nav.html' %}
+        <div class=" container col-lg-12 mySlide">
+            <div class="d-md-flex justify-content-between">
+                <div class="col-md-6">
+                    <p class="h2 text-muted">Hello I'm</p>
+                    <h1 class="my-3 name">{{ user.first_name }} {{ user.last_name }}</h1>
+                    <h3 class="my-3 lh-base text-muted">{{ user.portfolio_info.about_me }}</h5>
+                    <button class="myBtn d-block my-4" data-bs-toggle="modal" href="#exampleModalToggle" >Hire Me</button>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img width="60%" src="/media/{{ user.portfolio_info.banner_image }}" class="img-fluid" alt="banner_img">
+                </div>
+            </div>
+        </div>
+    </header>
+    <object data="{% static 'image/wave.svg' %}" width="100%" class="wave"> </object>
+    {% include 'portfolio/components/modal.html' %}
+
+    <main>
+        {% comment %} Feature Section {% endcomment %}
+        <section id="serviceSection" class="py-5 container">
+            <hr>
+            <span class="text-danger text-left fs-5">Feature</span>
+            <p class="h1 myh1 fw-bold text-left text-dark my-3">What I Do</p>
+            <div class="row row-cols-1 row-cols-md-3 g-4">                
+                {% for feature in user.my_service.all %}
+                    {% include 'portfolio/components/featureCard.html' %}
+                {% endfor %}
+            </div>
+        </section>
+        
+        {% comment %} portfolio Section {% endcomment %}
+        <section id="portfolioSection" class="py-5 container">
+            <hr>
+            <div class="text-center">
+                <span class="text-danger text-left fs-5">VISIT MY PORTFOLIO AND KEEP YOUR FEEDBACK</span>
+                <p class="h1 myh1 fw-bold text-left text-dark my-3">My Portfolio</p>
+            </div>
+            {% include 'portfolio/components/portfolioCard.html' %}
+        </section>
+        {% comment %} resume section {% endcomment %}
+        <section id="aboutSection" class="py-5 container">
+            <hr>
+            <div class="text-center">
+                <span class="text-danger text-left fs-5">7+ YEARS OF EXPERIENCE</span>
+                <p class="h1 myh1 fw-bold text-left text-dark my-3">My Resume</p>
+            </div>
+            <div class="d-md-flex">
+                <div class="col-md-4">
+                    <button class="toggleBtn educationBtn" onclick=resumeFilter('educationSection')>Education</button>
+                </div>
+                <div class="col-md-4">
+                    <button class="toggleBtn" onclick=resumeFilter('skillSection')>Professional Skill</button>
+                </div>
+                <div class="col-md-4">
+                    <button class="toggleBtn experienceBtn" onclick=resumeFilter('experienceSection')>Experience</button>
+                </div>    
+            </div>
+            {% comment %} professional skill {% endcomment %}
+            <div class="row row-cols-1 row-cols-md-5 g-4 my-4 skillSection d-none" >
+                {% include 'portfolio/components/skill.html' %}
+                {% include 'portfolio/components/skill.html' %}
+                {% include 'portfolio/components/skill.html' %}
+                {% include 'portfolio/components/skill.html' %}
+                {% include 'portfolio/components/skill.html' %}
+            </div>            
+            {% comment %} education background {% endcomment %}
+            <div class="row row-cols-1 row-cols-md-2 g-4 my-4 educationSection">
+                {% include 'portfolio/components/educationCard.html' %}
+                {% include 'portfolio/components/educationCard.html' %}
+                {% include 'portfolio/components/educationCard.html' %}
+                {% include 'portfolio/components/educationCard.html' %}
+            </div>  
+            {% comment %} Job Experince  {% endcomment %}
+            <div class="row row-cols-1 row-cols-md-2 g-4 my-4 experienceSection d-none">
+                {% include 'portfolio/components/experienceCard.html' %}
+                {% include 'portfolio/components/experienceCard.html' %}
+                {% include 'portfolio/components/experienceCard.html' %}
+            </div>
+        </section>
+        {% comment %} Testimonials Section {% endcomment %}
+        <section id="testmonialSection" class="py-5 container">
+            <hr>
+            <div class="text-center">
+                <span class="text-danger text-left fs-5">WHAT CLIENTS SAY</span>
+                <p class="h1 myh1 fw-bold text-left text-dark my-3">Testimonial</p>
+            </div>
+            <div class="single-item">
+                {% include 'portfolio/components/testimonialCard.html' %}
+                {% include 'portfolio/components/testimonialCard.html' %}
+                {% include 'portfolio/components/testimonialCard.html' %}
+            </div>
+        </section>
+        {% comment %} Contact With me Section {% endcomment %}
+        <section id="contactSection" class="py-5 container">
+            <hr>
+            <div class="text-center">
+                <span class="text-danger text-left fs-5">CONTACT</span>
+                <p class="h1 myh1 fw-bold text-left text-dark my-3">Contact With Me</p>
+            </div>
+            {% include 'portfolio/components/contactCard.html' %}
+        </section>        
+    </main>
+
+    <footer class="text-muted py-5">
+        <div class="container">            
+            <button onclick="topFunction()" id="scrollBtn">
+                <i class="fa fa-arrow-circle-up"></i>
+            </button>
+            {% include 'portfolio/components/footer.html' %}
+        </div>
+    </footer>
+    {% block javascript %}
+    {% include 'base_template/js.html' %}
+    {% include 'portfolio/home/js.html' %}
+        {% block js %}{% endblock js %}
+    {% endblock javascript %}
+  </body>
+</html>

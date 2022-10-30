@@ -75,6 +75,8 @@ class ExperinceForm(forms.ModelForm):
 		exclude = ('user', 'created_by', 'updated_by', 'created_at', 'updated_at')
 
 class ClientFeedbackForm(forms.ModelForm):
+	contract_start = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
+	contract_end = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}))
 	class Meta:
 		model = ClientFeedback
 		fields = '__all__'

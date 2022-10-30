@@ -1,0 +1,67 @@
+{% load static %}
+<div class="d-md-flex gap-3">
+    <div class="col-md-4 my-4">
+        <div class="card shadow-lg p-2 rounded-3 border-0" data-aos="fade-up-right">
+            <div class="contactCard m-4 rounded-3 border-0 bg-dark overflow-hidden">
+                <img src="/media/{{ user.portfolio_info.footer_image }}" class="img-fluid portfolioImg" alt="footer_img">
+            </div>
+            <div class="card-body">
+                <span class="text-danger fs-6">{{ user.portfolio_info.company_name }}</span>
+                <p class="h2 fw-bold">{{ user.first_name }} {{ user.last_name }}</p>
+                <p class="h6 text-secondary">{{ user.portfolio_info.designation }}</p>
+                <p class="text-secondary">I am available for freelance work. Connect with me via and call in to my account.</p>
+                <p class="text-secondary m-0">
+                    Phone: <a class="text-decoration-none link-danger" href="tel:{{ user.portfolio_info.phone_no }}">{{ user.portfolio_info.phone_no }}</a>
+                </p>
+                <p class="text-secondary">
+                    Email: <a class="text-decoration-none link-danger" href="mailto:{{ user.email }}">{{ user.email }}</a>
+                </p>
+                <p >FIND WITH ME</p>
+                <a href="{{ user.portfolio_info.facebook_id }}" class="text-decoration-none">
+                    <button type="button" class="btn btn-outline-primary">
+                        <i class="fa fa-facebook"></i>
+                    </button>
+                </a>
+                <a href="{{ user.portfolio_info.linked_id }}" class="text-decoration-none">
+                    <button type="button" class="btn btn-outline-info">
+                        <i class="fa fa-linkedin"></i>
+                    </button>
+                </a>
+                <a href="{{ user.portfolio_info.github_id }}" class="text-decoration-none">
+                    <button type="button" class="btn btn-outline-secondary">
+                        <i class="fa fa-github"></i>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 my-4">
+        <div class="card shadow-lg p-4 rounded-3 border-0" data-aos="fade-up-left">
+            <form method="get" action="#"></form>
+                <div class="row">
+                    <div class="col-md-6 form-group my-2">
+                        <label for="your_name" class="text-secondary">Your Name</label>
+                        <input type="text" class="form-control mt-3">
+                    </div>
+                    <div class="col-md-6 form-group my-2">
+                        <label for="your_name" class="text-secondary">Phone Number</label>
+                        <input type="number" class="form-control mt-3">
+                    </div>
+                </div>
+                <div class="form-group my-2">
+                    <label for="email" class="text-secondary">Email</label>
+                    <input type="text" class="form-control mt-3">
+                </div>
+                <div class="form-group my-2">
+                    <label for="email" class="text-secondary">Subject</label>
+                    <input type="text" class="form-control mt-3">
+                </div>
+                <div class="form-group my-2">
+                    <label for="email" class="text-secondary">Your Messages</label>
+                    <textarea class="form-control mt-3" style="height: 123px"></textarea>
+                </div>
+                <button class="btn btn-danger text-uppercase my-4 py-2" type="submit">Send Message</button>
+            </form>    
+        </div>
+    </div>
+</div>

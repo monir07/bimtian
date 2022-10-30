@@ -1,0 +1,141 @@
+.myh1{
+    font-size:4rem;
+}
+.myBtn{
+    background-color: #f75023;
+    border-radius: 25px;
+    padding: 10px 25px 10px 25px;
+    border: none;
+    color: #fff;
+    filter: drop-shadow(0 4px 0.20rem rgba(65, 65, 65, 0.514));
+}
+.myBtn:hover{  
+    /* transition: filter .5s;  
+    filter: drop-shadow(0 0 0.25rem crimson); */
+    background-color: #142eb5;    
+}
+
+.myBtn2{
+    background-color: #ffd700;
+    border-radius: 25px;
+    padding: 10px 25px 10px 25px;
+    border: none;
+    color: rgb(34, 34, 34);
+    filter: drop-shadow(0 4px 0.20rem rgba(65, 65, 65, 0.514));
+}
+.myBtn2:hover{  
+    color: #fff;
+    background-color: #142eb5;    
+}
+
+.myNavLink:link{
+    text-decoration: none;    
+    color: rgb(54, 54, 54);
+}
+.myNavLink:hover{
+    color: #f75023;
+}
+
+.navBgColor{
+    background-color: #ffffff;
+}
+.mySlide{
+    padding-top: 100px;
+}
+.name{
+    font-size: 5rem;
+    color: #f75023;
+}
+
+.wave{
+    margin-top:-100px;
+}
+
+/* Feature Section */
+.featureCard{
+    transition: .5s ease-in-out;
+}
+.featureCard:hover{
+    background-color: #ffd700;
+}
+/* portfolio section */
+.portfolioCard{
+    background: linear-gradient(#eff2f6, #fff)
+}
+.portfolioImg{
+    transition: .5s ease-in-out;
+}
+.portfolioImg:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.portfoliLink{
+    text-decoration: none;
+    color: rgb(19, 19, 19);
+}
+.portfoliLink:hover{color:#f75023}
+/* Resume section */
+.toggleBtn{
+    background-color: #f75023;
+    padding: 25px 25px 25px 25px;
+    border: none;
+    color: #fff;
+    width: 100%;
+    font-size: 1.2rem;
+    transition: .3s ease-in-out;
+}
+.toggleBtn:hover{
+    background-color: #d43f15;    
+    filter: drop-shadow(0px 0px 5px rgba(65, 65, 65, 0.514));
+
+}
+.educationBtn{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.experienceBtn{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+/* skill section */
+.skillImg{
+    width: 50%;
+    height: 50%;
+}
+/* Testimonial */
+.testmonialCard{
+    height: 350px;
+}
+.testmonialBg{
+    background-image: url(../../image/quote.png);
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: 150px;
+    background-blend-mode: hard-light;
+}
+/* Contact Section */
+.contactCard{
+    height: 200px;
+}
+
+/* Scroll Button */
+#scrollBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #f75023;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+}
+/* Slick previous and next */
+.slick-prev{
+    background-color: #d43f15;
+    border: 1px solid red;
+}

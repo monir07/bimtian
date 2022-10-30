@@ -49,7 +49,11 @@
                     <td> {{ item.mother_name }} </td>
                     <td> {{ item.course_name }} </td>
                     <td> {{ item.intake_name }} </td>
-                    <td> <button class="btn btn-success"><i class="fa fa-eye"></i></button> </td>
+                    <td> 
+                      <button class="btn btn-success"><i class="fa fa-eye"></i></button> 
+                      <a href="{% url 'user_info_update' item.pk %}"class="btn btn-primary"><i class="fa fa-pencil"></i></a> 
+                      <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    </td>
                   </tr>
                   {% endfor %}
                 </tbody>

@@ -14,13 +14,13 @@
       {% endfor %}
     </div>
 
-    {% if items %}
+    <a href="{% url 'experience_form' %}" class="btn btn-primary m-2">Add Experince</a>
       <!-- DATA LIST START TABLE -->
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <div class="x_title">
-              <h2> {{ title }} <small>Try hovering over the rows</small></h2>
+              <h2> {{ title }} <small>All Experince list here...</small></h2>
               <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -33,23 +33,28 @@
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Father's Name</th>
-                    <th>Mother's Name</th>
-                    <th>Course Name</th>
-                    <th>Intake</th>
+                    <th>Company Name</th>
+                    <th>Designation</th>
+                    <th>Join Year</th>
+                    <th>Resigned Year</th>
+                    <th>Responsibility</th>
+                    <th>Logo</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {% for item in items %}
                   <tr>
-                    <th scope="row">{{ item.user.first_name }} {{ item.user.last_name }}</th>
-                    <td> {{ item.father_name }}</td>
-                    <td> {{ item.mother_name }} </td>
-                    <td> {{ item.course_name }} </td>
-                    <td> {{ item.intake_name }} </td>
-                    <td> <button class="btn btn-success"><i class="fa fa-eye"></i></button> </td>
+                    <th scope="row">{{ item.company_name }} </th>
+                    <td> {{ item.designation }}</td>
+                    <td> {{ item.join_year }}</td>
+                    <td> {{ item.resign_year }}</td>
+                    <td> {{ item.responsibility }}</td>
+                    <td> {{ item.company_logo }}</td>
+                    <td> 
+                      <a href="{% url 'experience_info_update' item.pk %}"class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                      <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    </td>
                   </tr>
                   {% endfor %}
                 </tbody>
@@ -59,8 +64,6 @@
           </div>
         </div>
       </div>
-    {% else %}
-      <a href="{% url 'user_info_form' %}" class="btn btn-primary m-2">New Form</a>
-    {% endif %}
+    
   </div>
 {% endblock content %}

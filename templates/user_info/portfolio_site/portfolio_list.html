@@ -14,7 +14,7 @@
       {% endfor %}
     </div>
 
-    {% if items %}
+    <a href="{% url 'project_form' %}" class="btn btn-primary m-2">Add Project</a>
       <!-- DATA LIST START TABLE -->
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -33,23 +33,22 @@
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Father's Name</th>
-                    <th>Mother's Name</th>
-                    <th>Course Name</th>
-                    <th>Intake</th>
+                    <th>Project Name</th>
+                    <th>Live Site</th>
+                    <th>Github-Link</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {% for item in items %}
                   <tr>
-                    <th scope="row">{{ item.user.first_name }} {{ item.user.last_name }}</th>
-                    <td> {{ item.father_name }}</td>
-                    <td> {{ item.mother_name }} </td>
-                    <td> {{ item.course_name }} </td>
-                    <td> {{ item.intake_name }} </td>
-                    <td> <button class="btn btn-success"><i class="fa fa-eye"></i></button> </td>
+                    <th scope="row">{{ item.project_name }} </th>
+                    <td> {{ item.preview_link }}</td>
+                    <td> {{ item.github_link }}</td>
+                    <td> 
+                      <a href="{% url 'project_info_update' item.pk %}"class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                      <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    </td>
                   </tr>
                   {% endfor %}
                 </tbody>
@@ -59,8 +58,6 @@
           </div>
         </div>
       </div>
-    {% else %}
-      <a href="{% url 'user_info_form' %}" class="btn btn-primary m-2">New Form</a>
-    {% endif %}
+    
   </div>
 {% endblock content %}

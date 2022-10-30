@@ -201,3 +201,43 @@ class UserInfoListView(LoginRequiredMixin, generic.ListView):
         queryset = super().get_queryset()
         queryset = queryset.filter(Q(user__id=self.request.user.id))                            
         return queryset
+
+
+class UserInfoUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = UserInfo
+    form_class = UserInfoForm
+    template_name = 'user_info/form.html'
+    success_message = "Information updated successfully"
+    title = "Update User Information"
+    success_url = "profile_list" 
+
+    def form_valid(self, form, *args, **kwargs):
+        self.object = form.save(commit=False)
+        self.object.updated_by = self.request.user
+        with transaction.atomic():
+            self.object.save()
+        messages.success(self.request, self.success_message)
+        return HttpResponseRedirect(reverse_lazy(self.success_url))
+    
+    def form_invalid(self, form):
+        messages.error(self.request, form.errors)
+        return super().form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.title
+        context['work'] = True
+        return context
+
+from django.contrib.auth import get_user_model
+User = get_user_model()
+class PortfolioHomeView(View):
+    template_name = 'portfolio/home/index.html'
+
+    def get(self, request, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        user = User.objects.get(pk=pk)
+        context = {
+            'user': user,
+        }
+        return render(request, self.template_name, context)

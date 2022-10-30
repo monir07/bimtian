@@ -1,0 +1,31 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-light navBgColor">
+  <div class="container">
+    <a class="navbar-brand" href="#">Brand</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link mx-md-3 myNavLink" href="#"">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-md-3 myNavLink" href="#serviceSection"> Service</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-md-3 myNavLink" href="#portfolioSection">Portfolio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-md-3 myNavLink" href="#aboutSection">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-md-3 myNavLink" href="#testmonialSection">Testimonial</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-md-3 myNavLink" href="#contactSection">Contact</a>
+        </li>
+      </ul>
+      <a href="{{ user.user_info.cv_link }}" target="_blank"> <button class="myBtn"> <i class="fa fa-download"></i> Download CV</button></a>
+    </div>
+  </div>
+</nav>
