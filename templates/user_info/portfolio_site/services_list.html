@@ -45,7 +45,7 @@
                     <td> {{ item.description }}</td>
                     <td> 
                       <a href="{% url 'sevice_info_update' item.pk %}"class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                      <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                      <a href="{% url 'service_delete' item.pk %}"class="btn btn-danger"><i class="fa fa-trash"></i></a>
                     </td>
                   </tr>
                   {% endfor %}

@@ -53,7 +53,7 @@
                     <td> {{ item.company_logo }}</td>
                     <td> 
                       <a href="{% url 'experience_info_update' item.pk %}"class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                      <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                      <a href="{% url 'experience_delete' item.pk %}"class="btn btn-danger"><i class="fa fa-trash"></i></a>
                     </td>
                   </tr>
                   {% endfor %}

@@ -14,7 +14,8 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.admin.models import LogEntry, ADDITION, CHANGE, DELETION
 from django.contrib.contenttypes.models import ContentType
-
+from django.contrib.auth import get_user_model
+User = get_user_model()
 # Create your views here.
 class CustomPermissionMixin(PermissionRequiredMixin):
     permission_required = ""
@@ -161,6 +162,7 @@ class UserInfoCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = 'user_info/form.html'
     success_message = "Information added successfully"
     title = "Add User Information"
+    success_url = None
     
     def form_valid(self, form, *args, **kwargs):
         self.object = form.save(commit=False)
@@ -170,7 +172,7 @@ class UserInfoCreateView(LoginRequiredMixin, generic.CreateView):
         with transaction.atomic():
             self.object.save()
         messages.success(self.request, self.success_message)
-        return HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect(reverse_lazy(self.success_url))
     
     def form_invalid(self, form):
         messages.error(self.request, form.errors)
@@ -229,8 +231,22 @@ class UserInfoUpdateView(LoginRequiredMixin, generic.UpdateView):
         context['work'] = True
         return context
 
-from django.contrib.auth import get_user_model
-User = get_user_model()
+class UserInfoDeleteView(generic.edit.DeleteView):
+    model = UserInfo
+    success_url = 'profile_list'
+    template_name = 'user_info/delete_confirm.html'
+    success_message = 'Deleted Successfully!'
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return HttpResponseRedirect(reverse_lazy(self.success_url))
+        else:
+            self.object = self.get_object()
+            self.object.delete()
+            messages.success(self.request, self.success_message)
+            return HttpResponseRedirect(reverse_lazy(self.success_url))
+
+
 class PortfolioHomeView(View):
     template_name = 'portfolio/home/index.html'
 
