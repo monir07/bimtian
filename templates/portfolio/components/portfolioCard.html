@@ -1,69 +1,20 @@
 {% load static %}
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
-      <div class="card shadow-lg p-2 rounded-5 border-0 portfolioCard" data-aos="fade-right">
-        <div class="card m-4 rounded-5 border-0 bg-dark">
-          <img src="{% static 'img/user_img.png' %}" class="card-img-top img-fluid portfolioImg" alt="...">
-        </div>
-        <div class="card-body">
-          <a href="#portfoli_link" class="portfoliLink">
-            <h4 class="card-title">Mobile app landing design & app maintain</h5>
-          </a>
-          <div class="d-flex justify-content-between mt-4">
-            <button type="button" class="myBtn">
-              <i class="fa fa-paper-plane"></i>
-              Live Preview
-            </button>
-            <button type="button" class="myBtn2">
-              <i class="fa fa-github"></i>
-              Github
-            </button>
-          </div>
-        </div>
+
+<div class="col">
+  <div class="card shadow-lg p-2 rounded-5 border-0 portfolioCard" data-aos="fade-right">
+    <div class="card m-4 rounded-5 border-0 bg-dark">
+      <img src="/media/{{ portfolio.project_img }}" class="card-img-top img-fluid portfolioImg" alt="...">
+    </div>
+    <div class="card-body">
+      <a href="#portfoli_link" class="portfoliLink">
+        <h4 class="card-title">{{ portfolio.project_name }}</h5>
+      </a>
+      <div class="d-flex justify-content-between mt-4">
+        <a href="{{ portfolio.preview_link }}" target="_blank"> <button class="myBtn"> <i class="fa fa-download"></i> Live Preview</button></a>
+        
+        <a href="{{ portfolio.github_link }}" target="_blank"> <button class="myBtn2"> <i class="fa fa-download"></i> Github</button></a>
       </div>
     </div>
-    <div class="col">
-      <div class="card shadow-lg p-2 rounded-5 border-0 portfolioCard" data-aos="zoom-in-down">
-        <div class="card m-4 rounded-5 border-0 bg-dark">
-          <img src="{% static 'img/user_img.png' %}" class="card-img-top img-fluid portfolioImg" alt="...">
-        </div>
-        <div class="card-body">
-          <a href="#portfoli_link" class="portfoliLink">
-            <h4 class="card-title">Design for tecnology & services</h5>
-          </a>
-          <div class="d-flex justify-content-between mt-4">
-            <button type="button" class="myBtn">
-              <i class="fa fa-paper-plane"></i>
-              Live Preview
-            </button>
-            <button type="button" class="myBtn2">
-              <i class="fa fa-github"></i>
-              Github
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card shadow-lg p-2 rounded-5 border-0 portfolioCard" data-aos="fade-left">
-        <div class="card m-4 rounded-5 border-0 bg-dark">
-          <img src="{% static 'img/user_img.png' %}" class="card-img-top img-fluid portfolioImg" alt="...">
-        </div>
-        <div class="card-body">
-          <a href="#portfoli_link" class="portfoliLink">
-            <h4 class="card-title">App for tecnology & services</h5>
-          </a>
-          <div class="d-flex justify-content-between mt-4">
-            <button type="button" class="myBtn">
-              <i class="fa fa-paper-plane"></i>
-              Live Preview
-            </button>
-            <button type="button" class="myBtn2">
-              <i class="fa fa-github"></i>
-              Github
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>      
   </div>
+</div>
+

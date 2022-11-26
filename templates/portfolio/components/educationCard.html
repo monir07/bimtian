@@ -5,16 +5,16 @@
             <button type="button" class="myBtn2">
                 <i class="fa fa-graduation-cap
                 "></i>
-                Bachelor of Science
-              </button>
+                {{ education.degree_name }}
+            </button>
         </div>
         <div class="card-body p-0">
-            <p class="h2 fw-bold">Computer Science & Engineering</p>
-            <p class="h5 text-secondary">Northern University of Business and Technology.</p>
-            <span class="text-danger fs-6">2016-2020</span>
+            <p class="h2 fw-bold"> {{ education.subject }} </p>
+            <p class="h5 text-secondary">{{ education.institute }}</p>
+            <span class="text-danger fs-6">{{ education.start_year }} - {{ education.passing_year }}</span>
             
             <p class="text-muted">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam, excepturi.
+                {{ education.short_brief }}
             </p>
         </div>
     </div>

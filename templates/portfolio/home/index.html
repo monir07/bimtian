@@ -1,7 +1,7 @@
 <!doctype html>
 {% load static %}
 <html lang="en">
-  <head>
+    <head>
     {% block head %}
         {% block meta %}
             <meta charset="utf-8">
@@ -24,8 +24,8 @@
         <!--custom head-->
         {% block customhead %}{% endblock customhead %}
     {% endblock head %}    
-  </head>
-  <body>
+    </head>
+    <body>
 
     <header class="container-fluid">
         {% include 'portfolio/components/nav.html' %}
@@ -38,7 +38,7 @@
                     <button class="myBtn d-block my-4" data-bs-toggle="modal" href="#exampleModalToggle" >Hire Me</button>
                 </div>
                 <div class="col-lg-6 text-center">
-                    <img width="60%" src="/media/{{ user.portfolio_info.banner_image }}" class="img-fluid" alt="banner_img">
+                    <img width="70%" src="/media/{{ user.portfolio_info.banner_image }}" class="img-fluid" alt="banner_img">
                 </div>
             </div>
         </div>
@@ -66,7 +66,11 @@
                 <span class="text-danger text-left fs-5">VISIT MY PORTFOLIO AND KEEP YOUR FEEDBACK</span>
                 <p class="h1 myh1 fw-bold text-left text-dark my-3">My Portfolio</p>
             </div>
-            {% include 'portfolio/components/portfolioCard.html' %}
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for portfolio in user.my_portfolio.all %}
+                    {% include 'portfolio/components/portfolioCard.html' %}
+                {% endfor %}
+            </div>    
         </section>
         {% comment %} resume section {% endcomment %}
         <section id="aboutSection" class="py-5 container">
@@ -88,24 +92,23 @@
             </div>
             {% comment %} professional skill {% endcomment %}
             <div class="row row-cols-1 row-cols-md-5 g-4 my-4 skillSection d-none" >
-                {% include 'portfolio/components/skill.html' %}
-                {% include 'portfolio/components/skill.html' %}
-                {% include 'portfolio/components/skill.html' %}
-                {% include 'portfolio/components/skill.html' %}
-                {% include 'portfolio/components/skill.html' %}
+                {% for skill in user.my_skill.all %}
+                    {% include 'portfolio/components/skill.html' %}
+                {% endfor %}
             </div>            
             {% comment %} education background {% endcomment %}
             <div class="row row-cols-1 row-cols-md-2 g-4 my-4 educationSection">
-                {% include 'portfolio/components/educationCard.html' %}
-                {% include 'portfolio/components/educationCard.html' %}
-                {% include 'portfolio/components/educationCard.html' %}
-                {% include 'portfolio/components/educationCard.html' %}
+                {% for education in user.my_education.all %}
+                    {% include 'portfolio/components/educationCard.html' %}
+                {% endfor %}
+                
             </div>  
             {% comment %} Job Experince  {% endcomment %}
             <div class="row row-cols-1 row-cols-md-2 g-4 my-4 experienceSection d-none">
-                {% include 'portfolio/components/experienceCard.html' %}
-                {% include 'portfolio/components/experienceCard.html' %}
-                {% include 'portfolio/components/experienceCard.html' %}
+                {% for experience in user.my_experience.all %}
+                    {% include 'portfolio/components/experienceCard.html' %}
+                {% endfor %}
+                
             </div>
         </section>
         {% comment %} Testimonials Section {% endcomment %}
@@ -116,9 +119,9 @@
                 <p class="h1 myh1 fw-bold text-left text-dark my-3">Testimonial</p>
             </div>
             <div class="single-item">
-                {% include 'portfolio/components/testimonialCard.html' %}
-                {% include 'portfolio/components/testimonialCard.html' %}
-                {% include 'portfolio/components/testimonialCard.html' %}
+                {% for feedback in user.my_feedback.all %}
+                    {% include 'portfolio/components/testimonialCard.html' %}
+                {% endfor %}
             </div>
         </section>
         {% comment %} Contact With me Section {% endcomment %}

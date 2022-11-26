@@ -3,18 +3,18 @@
     <div class="card p-4 border-0 shadow-lg">
         <div class="d-flex  align-items-center">
             <div class="col-md-8">
-                <p class="h2 fw-bold">Khulna Shipyard Limited</p>
-                <p class="h6 text-secondary">Assistant Programmer (Django)</p>
-                <span class="text-danger fs-6">2016-Running</span>
+                <p class="h2 fw-bold">{{ experience.company_name }}</p>
+                <p class="h6 text-secondary">{{ experience.designation }}</p>
+                <span class="text-danger fs-6">{{ experience.join_year }} - {{ experience.resign_year }}</span>
             </div>   
             <div class="card p-0 rounded-circle border-0 shadow-lg overflow-hidden">
-                <img src="{% static 'img/user_img.png' %}" class="card-img-top img-fluid" alt="...">
+                <img src="/media/{{ experience.company_logo }}" class="card-img-top img-fluid" alt="...">
             </div>
         </div>
         <div class="card-body p-0">
             <hr>
             <p class="text-muted">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam, excepturi.
+                {{ experience.responsibility }}
             </p>
         </div>
     </div>
